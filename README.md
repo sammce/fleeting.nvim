@@ -2,7 +2,7 @@
 
 Time is fleeting, and what better way to spend it than ~~configuring~~ using [Neovim](https://github.com/neovim/neovim)!
 
-This plugin simply keeps track of the amount of time you have spent in neovim (since installing it, it's not magic).
+This plugin simply keeps track of the amount of time you have spent in neovim (since installing the plugin, it's not magic).
 
 This is a dastardly simple plugin, and by dastardly simple, I mean I wrote it today.
 Today is obviously not _today_ for you, but it is for me. Anyway...
