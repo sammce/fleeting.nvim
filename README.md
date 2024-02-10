@@ -14,7 +14,7 @@ Today is obviously not _today_ for you, but it is for me. Anyway...
 
 ## Installation
 
-##### Please note: this plugin currently only works on \*nix systems.
+**Note:** this plugin currently only works on \*nix systems (I think, feel free to try).
 
 Using lazy:
 
