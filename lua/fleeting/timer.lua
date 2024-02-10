@@ -1,4 +1,9 @@
-local log = require("fleet.log")
+local log = require("fleeting.log")
+local constants = require("fleeting.constants")
+
+local global_start = constants.global_start
+local global_initialised = constants.global_initialised
+
 
 --- Calculate the total time spent in Neovim, without stopping the timer.
 --
@@ -10,10 +15,11 @@ local function total()
     return nil
   end
 
-  local elapsed = os.difftime(os.time(), vim.g.fleet_start_time)
+  local elapsed = os.difftime(os.time(), vim.g[global_start])
 
   return previous_time + elapsed
 end
+
 
 --- Calculate the elapsed time and write it to the log file.
 local function stop()
@@ -25,16 +31,17 @@ local function stop()
 
   log.write(total_time)
 
-  vim.g.fleet_start_time = nil
+  vim.g[global_start] = nil
 end
+
 
 --- Set the start time to the current time and initialise the log file.
 local function start()
-  vim.g.fleet_start_time = os.time()
+  vim.g[global_start] = os.time()
 
   local error = log.init()
   if not error then
-    vim.g.fleet_initialised = true
+    vim.g[global_initialised] = true
   end
 end
 
