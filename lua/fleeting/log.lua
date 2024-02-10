@@ -1,6 +1,7 @@
 local constants = require("fleeting.constants")
 local log_file = constants.log_file
 local title = constants.title
+local global_initialised = constants.global_initialised
 
 
 -- Show an error notification with the given message.
@@ -24,7 +25,7 @@ local function init()
       return 1
     end
 
-    file:write("0\n")
+    file:write(0 .. "\n")
   end
 
   file:close()
@@ -34,7 +35,7 @@ end
 -- Read the duration from the log file (as a number).
 --- @return number? duration
 local function read()
-  if not vim.g.fleeting_initialised then
+  if not vim.g[global_initialised] then
     return nil
   end
 
@@ -57,7 +58,7 @@ end
 --- @param duration number
 --- @return number? error
 local function write(duration)
-  if not vim.g.fleeting_initialised then
+  if not vim.g[global_initialised] then
     return 1
   end
 
@@ -75,12 +76,14 @@ end
 
 -- Delete the log file.
 local function delete()
-  local error = os.remove(log_file)
+  local success = os.remove(log_file)
 
-  if error then
+  if not success then
     notify_error("Error while deleting log file")
     return
   end
+
+  vim.g[global_initialised] = false
 
   vim.notify("Deleted log file", vim.log.levels.INFO, { title = title })
 end
@@ -91,6 +94,5 @@ return {
   read = read,
   write = write,
   notify_error = notify_error,
-  title = title,
   delete = delete,
 }
