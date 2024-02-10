@@ -5,7 +5,7 @@ local global_initialised = constants.global_initialised
 
 
 -- Show an error notification with the given message.
---- @param message string
+--- @param message string: the error message
 local function notify_error(message)
   vim.notify(message, vim.log.levels.ERROR, { title = title })
 end
@@ -13,7 +13,7 @@ end
 
 --  Try to open the log file. If it doesn't exist,
 --  create it and write the current time to it.
----  @return number? error
+---  @return number? error: an error code, or nil if the file was created successfully
 local function init()
   local file = io.open(log_file, "r")
 
@@ -33,7 +33,7 @@ end
 
 
 -- Read the duration from the log file (as a number).
---- @return number? duration
+--- @return number? duration: the duration in seconds, or nil if the file could not be read
 local function read()
   if not vim.g[global_initialised] then
     return nil
@@ -56,7 +56,7 @@ end
 
 -- Write the given duration to the log file.
 --- @param duration number
---- @return number? error
+--- @return number? error: an error code, or nil if the file was written to successfully
 local function write(duration)
   if not vim.g[global_initialised] then
     return 1

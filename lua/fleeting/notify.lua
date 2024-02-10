@@ -5,6 +5,10 @@ local constants = require("fleeting.constants")
 local function fleeting_time()
   local total_time = require("fleeting.timer").total()
 
+  if total_time == nil then
+    return
+  end
+
   vim.notify(
     constants.fleeting_time_msg(total_time),
     vim.log.levels.INFO,

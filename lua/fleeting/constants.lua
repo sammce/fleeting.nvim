@@ -1,3 +1,5 @@
+local units = require("fleeting.units")
+
 return {
   -- The path to the log file
   -- TODO: Make this work on non *nix systems
@@ -6,9 +8,12 @@ return {
   -- The title for the notifications
   title = "Fleeting.nvim",
 
-  -- The message to display in the timer notification
+  -- Format the message to display in the timer notification.
+  --- @param total_time number: the total time in seconds
+  --- @return string formatted_time: the formatted time string
   fleeting_time_msg = function(total_time)
-    return "You have spent (at least) " .. total_time .. " seconds of your life in Neovim"
+    formatted_time = units.format_time(total_time)
+    return "You have spent > " .. formatted_time .. " of your life in Neovim"
   end,
 
   -- The name of the global variable that stores the start time

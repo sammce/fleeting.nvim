@@ -6,7 +6,7 @@ local global_initialised = constants.global_initialised
 
 
 -- Calculate the total time spent in Neovim, without stopping the timer.
---- @return number? total_time
+--- @return number? total_time: the total time in seconds, or nil if the timer has not been initialised
 local function total()
   local previous_time = log.read()
 
