@@ -20,7 +20,7 @@ local function init()
     file = io.open(log_file, "w")
 
     if file == nil then
-      notify_error("Error while creating " .. title .. " log file")
+      notify_error("Error while creating log file")
       return 1
     end
 
@@ -41,7 +41,7 @@ local function read()
   local file = io.open(log_file, "r")
 
   if file == nil then
-    notify_error("Error while reading " .. title .. " log file")
+    notify_error("Error while reading log file")
     return nil
   end
 
@@ -64,7 +64,7 @@ local function write(duration)
   local file = io.open(log_file, "w")
 
   if file == nil then
-    notify_error("Error while writing to " .. title .. " log file")
+    notify_error("Error while writing to log file")
     return 1
   end
 
@@ -73,10 +73,24 @@ local function write(duration)
 end
 
 
+-- Delete the log file.
+local function delete()
+  local error = os.remove(log_file)
+
+  if error then
+    notify_error("Error while deleting log file")
+    return
+  end
+
+  vim.notify("Deleted log file", vim.log.levels.INFO, { title = title })
+end
+
+
 return {
   init = init,
   read = read,
   write = write,
   notify_error = notify_error,
-  title = title
+  title = title,
+  delete = delete,
 }

@@ -3,7 +3,9 @@ if exists("g:fleeting_loaded")
 endif
 let g:fleeting_loaded = 1
 
-command -nargs=0 Fleet lua require('fleeting').notify.fleeting_time()
+command -nargs=0 Fleeting lua require('fleeting').notify.fleeting_time()
+command -nargs=0 FleetingReset lua require('fleeting').timer.reset()
+command -nargs=0 FleetingDelete lua require('fleeting').log.delete()
 
 augroup fleet
     autocmd!

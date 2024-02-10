@@ -5,8 +5,7 @@ local global_start = constants.global_start
 local global_initialised = constants.global_initialised
 
 
---- Calculate the total time spent in Neovim, without stopping the timer.
---
+-- Calculate the total time spent in Neovim, without stopping the timer.
 --- @return number? total_time
 local function total()
   local previous_time = log.read()
@@ -21,7 +20,7 @@ local function total()
 end
 
 
---- Calculate the elapsed time and write it to the log file.
+-- Calculate the elapsed time and write it to the log file.
 local function stop()
   local total_time = total()
 
@@ -35,7 +34,7 @@ local function stop()
 end
 
 
---- Set the start time to the current time and initialise the log file.
+-- Set the start time to the current time and initialise the log file.
 local function start()
   vim.g[global_start] = os.time()
 
@@ -46,8 +45,18 @@ local function start()
 end
 
 
+-- Reset the timer and log file.
+local function reset()
+  vim.g[global_start] = nil
+  log.write(0)
+
+  vim.notify("Timer reset", vim.log.levels.INFO, { title = constants.title })
+end
+
+
 return {
   stop = stop,
   start = start,
-  total = total
+  total = total,
+  reset = reset,
 }

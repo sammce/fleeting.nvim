@@ -23,11 +23,13 @@ Using lazy:
 
 No, this plugin is not magic (unfortunately). The plugin simply marks the time when you enter and leave neovim, calculates the difference, and stores it in a file at `vim.fn.stdpath("cache") .. "/fleeting.log"`, usually equivalent to `~/.cache/nvim/fleeting.log`. This allows the plugin to persist the timer over multiple neovim sessions.
 
-Running the `Fleet` command in neovim will show a notification detailing the amount of precious fleeting seconds you've spent with neovim open.
+Running the `:Fleeting` command in neovim will show a notification detailing the amount of precious fleeting seconds you've spent with neovim open.
 
 ## Reset the timer
 
-To reset the timer, simply close neovim and remove the file shown above.
+To reset the timer, you can run `:FleetingReset` which will set the current timer to 0 (both in memory and in the log file).
+
+If you want to delete the log file, run `:FleetingDelete`.
 
 ## Contributing
 
