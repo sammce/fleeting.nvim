@@ -13,7 +13,7 @@ return {
   --- @return string formatted_time: the formatted time string
   fleeting_time_msg = function(total_time)
     formatted_time = units.format_time(total_time)
-    return "You have spent > " .. formatted_time .. " of your life in Neovim"
+    return "You have spent (at least) " .. formatted_time .. " of your life in Neovim"
   end,
 
   -- The name of the global variable that stores the start time
