@@ -12,7 +12,7 @@ return {
   --- @param total_time number: the total time in seconds
   --- @return string formatted_time: the formatted time string
   fleeting_time_msg = function(total_time)
-    formatted_time = units.format_time(total_time)
+    local formatted_time = units.format_time(total_time)
     return "You have spent (at least) " .. formatted_time .. " of your life in Neovim"
   end,
 
