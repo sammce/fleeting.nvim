@@ -47,7 +47,7 @@ end
 
 -- Reset the timer and log file.
 local function reset()
-  vim.g[global_start] = nil
+  vim.g[global_start] = os.time()
   log.write(0)
 
   vim.notify("Timer reset", vim.log.levels.INFO, { title = constants.title })
