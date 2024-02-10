@@ -1,12 +1,12 @@
 -- The number of seconds in various time units
 local units = {
-  years = 31536000,
-  months = 2592000,
-  weeks = 604800,
-  days = 86400,
-  hours = 3600,
-  minutes = 60,
-  seconds = 1,
+  { years = 31536000 },
+  { months = 2592000 },
+  { weeks = 604800 },
+  { days = 86400 },
+  { hours = 3600 },
+  { minutes = 60 },
+  { seconds = 1 },
 }
 
 
@@ -16,11 +16,16 @@ local units = {
 local function format_time(seconds)
   local result = {}
 
-  for unit, value in pairs(units) do
-    local count = math.floor(seconds / value)
-    seconds = seconds % value
-    if count > 0 then
-      table.insert(result, count .. " " .. unit)
+  for _, unit in ipairs(units) do
+    -- Terrible hack to iterate over the key-value pairs
+    -- of the table in order
+    -- TODO: Make this less terrible
+    for name, value in pairs(unit) do
+      local count = math.floor(seconds / value)
+      seconds = seconds % value
+      if count > 0 then
+        table.insert(result, count .. " " .. name)
+      end
     end
   end
 
