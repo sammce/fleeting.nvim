@@ -36,7 +36,7 @@ local function format_time(seconds)
     local count = math.floor(seconds / value)
 
     if count > 0 then
-      result = result .. count .. " " .. unit .. " "
+      result = result .. count .. unit:sub(1, 1) .. " "
       seconds = seconds - count * value
     end
 
