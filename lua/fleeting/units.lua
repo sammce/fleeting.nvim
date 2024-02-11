@@ -18,12 +18,10 @@ M.format_time = function(seconds)
   local result = {}
 
   for _, unit in ipairs(units) do
-    -- Terrible hack to iterate over the key-value pairs
-    -- of the table in order
-    -- TODO: Make this less terrible
     for name, value in pairs(unit) do
       local count = math.floor(seconds / value)
       seconds = seconds % value
+
       if count > 0 then
         table.insert(result, count .. " " .. name)
       end

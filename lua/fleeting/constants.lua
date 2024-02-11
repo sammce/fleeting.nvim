@@ -6,7 +6,6 @@ M.is_windows = vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1
 M.path_sep = M.is_windows and "\\" or "/"
 
 -- The path to the log file
--- TODO: Make this work on non *nix systems
 M.log_file = vim.fn.stdpath("cache") .. M.path_sep .. "fleeting.log"
 
 -- The title for the notifications
