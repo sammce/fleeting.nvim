@@ -14,7 +14,9 @@ Today is obviously not _today_ for you, but it is for me. Anyway...
 
 ## Installation
 
-**Note:** this plugin currently only works on \*nix systems (I think, feel free to try).
+Requires neovim >= 0.9.
+
+**Note:** this plugin currently only works on \*nix systems.
 
 Using lazy:
 
@@ -26,7 +28,7 @@ Using lazy:
 
 ## Usage
 
-Refer to the table of command below:
+Refer to the table of commands below:
 
 | Command           | Effect                                                          |
 | ----------------- | --------------------------------------------------------------- |
