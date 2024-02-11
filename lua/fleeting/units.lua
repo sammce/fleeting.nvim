@@ -9,11 +9,12 @@ local units = {
   { seconds = 1 },
 }
 
+local M = {}
 
 -- Convert a number of seconds to a string of time units
 --- @param seconds number: the number of seconds to convert
 --- @return string result: the formatted string
-local function format_time(seconds)
+M.format_time = function(seconds)
   local result = {}
 
   for _, unit in ipairs(units) do
@@ -32,4 +33,4 @@ local function format_time(seconds)
   return table.concat(result, ", ")
 end
 
-return { format_time = format_time }
+return M

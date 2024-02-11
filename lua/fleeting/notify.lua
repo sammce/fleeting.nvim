@@ -1,8 +1,9 @@
 local constants = require("fleeting.constants")
 
+local M = {}
 
 -- Show a notification with the fleeting time.
-local function fleeting_time()
+M.fleeting_time = function()
   local total_time = require("fleeting.timer").total()
 
   if total_time == nil then
@@ -16,7 +17,4 @@ local function fleeting_time()
   )
 end
 
-
-return {
-  fleeting_time = fleeting_time
-}
+return M

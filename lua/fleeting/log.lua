@@ -3,10 +3,11 @@ local log_file = constants.log_file
 local title = constants.title
 local global_initialised = constants.global_initialised
 
+local M = {}
 
 -- Show an error notification with the given message.
 --- @param message string: the error message
-local function notify_error(message)
+M.notify_error = function(message)
   vim.notify(message, vim.log.levels.ERROR, { title = title })
 end
 
@@ -14,14 +15,14 @@ end
 --  Try to open the log file. If it doesn't exist,
 --  create it and write the current time to it.
 ---  @return number? error: an error code, or nil if the file was created successfully
-local function init()
+M.init = function()
   local file = io.open(log_file, "r")
 
   if file == nil then
     file = io.open(log_file, "w")
 
     if file == nil then
-      notify_error("Error while creating log file")
+      M.notify_error("Error while creating log file")
       return 1
     end
 
@@ -34,7 +35,7 @@ end
 
 -- Read the duration from the log file (as a number).
 --- @return number? duration: the duration in seconds, or nil if the file could not be read
-local function read()
+M.read = function()
   if not vim.g[global_initialised] then
     return nil
   end
@@ -42,7 +43,7 @@ local function read()
   local file = io.open(log_file, "r")
 
   if file == nil then
-    notify_error("Error while reading log file")
+    M.notify_error("Error while reading log file")
     return nil
   end
 
@@ -57,7 +58,7 @@ end
 -- Write the given duration to the log file.
 --- @param duration number
 --- @return number? error: an error code, or nil if the file was written to successfully
-local function write(duration)
+M.write = function(duration)
   if not vim.g[global_initialised] then
     return 1
   end
@@ -65,7 +66,7 @@ local function write(duration)
   local file = io.open(log_file, "w")
 
   if file == nil then
-    notify_error("Error while writing to log file")
+    M.notify_error("Error while writing to log file")
     return 1
   end
 
@@ -75,11 +76,11 @@ end
 
 
 -- Delete the log file.
-local function delete()
+M.delete = function()
   local success = os.remove(log_file)
 
   if not success then
-    notify_error("Error while deleting log file")
+    M.notify_error("Error while deleting log file")
     return
   end
 
@@ -88,11 +89,4 @@ local function delete()
   vim.notify("Deleted log file", vim.log.levels.INFO, { title = title })
 end
 
-
-return {
-  init = init,
-  read = read,
-  write = write,
-  notify_error = notify_error,
-  delete = delete,
-}
+return M

@@ -4,10 +4,12 @@ local constants = require("fleeting.constants")
 local global_start = constants.global_start
 local global_initialised = constants.global_initialised
 
+local M = {}
+
 
 -- Calculate the total time spent in Neovim, without stopping the timer.
 --- @return number? total_time: the total time in seconds, or nil if the timer has not been initialised
-local function total()
+M.total = function()
   local previous_time = log.read()
 
   if previous_time == nil then
@@ -21,8 +23,8 @@ end
 
 
 -- Calculate the elapsed time and write it to the log file.
-local function stop()
-  local total_time = total()
+M.stop = function()
+  local total_time = M.total()
 
   if total_time == nil then
     return
@@ -35,7 +37,7 @@ end
 
 
 -- Set the start time to the current time and initialise the log file.
-local function start()
+M.start = function()
   vim.g[global_start] = os.time()
 
   local error = log.init()
@@ -46,17 +48,11 @@ end
 
 
 -- Reset the timer and log file.
-local function reset()
+M.reset = function()
   vim.g[global_start] = os.time()
   log.write(0)
 
   vim.notify("Timer reset", vim.log.levels.INFO, { title = constants.title })
 end
 
-
-return {
-  stop = stop,
-  start = start,
-  total = total,
-  reset = reset,
-}
+return M
