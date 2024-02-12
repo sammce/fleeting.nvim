@@ -14,16 +14,24 @@ Today is obviously not _today_ for you, but it is for me. Anyway...
 
 ## Installation
 
-Requires neovim >= 0.9.
+Requires neovim, and a package manager of your choice.
 
-**Note:** this plugin currently only works on \*nix systems.
-
-Using lazy:
+Using [lazy](https://github.com/folke/lazy.nvim):
 
 ```lua
-{
-    'sammce/fleeting.nvim'
-},
+{ 'sammce/fleeting.nvim' },
+```
+
+[packer](https://github.com/wbthomason/packer.nvim):
+
+```lua
+use { 'sammce/fleeting.nvim' }
+```
+
+[vim-plug](https://github.com/junegunn/vim-plug):
+
+```vim
+Plug 'sammce/fleeting.nvim'
 ```
 
 ## Usage
