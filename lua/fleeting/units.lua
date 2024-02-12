@@ -23,6 +23,11 @@ M.format_time = function(seconds)
       seconds = seconds % value
 
       if count > 0 then
+        -- Remove the trailing 's' from the unit name if the count is 1
+        if count == 1 then
+          name = string.sub(name, 1, -2)
+        end
+
         table.insert(result, count .. " " .. name)
       end
     end
