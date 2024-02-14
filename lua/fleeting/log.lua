@@ -63,7 +63,7 @@ M.init = function()
   if previous_time == nil or last_write == nil then
     local err = M.convert()
     if err then
-      vim.notify("Invalid log file, run :Fleeting to reset", vim.log.levels.ERROR, { title = title })
+      vim.notify("Invalid log file, run :FleetingReset to reset it", vim.log.levels.ERROR, { title = title })
     end
   end
 
