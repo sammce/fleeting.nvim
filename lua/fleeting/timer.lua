@@ -10,13 +10,19 @@ local M = {}
 -- Calculate the total time spent in Neovim, without stopping the timer.
 --- @return number? total_time: the total time in seconds, or nil if the timer has not been initialised
 M.total = function()
-  local previous_time = log.read()
+  local previous_time, last_write = log.read()
 
-  if previous_time == nil then
+  if previous_time == nil or last_write == nil then
     return nil
   end
 
-  local elapsed = os.difftime(os.time(), vim.g[global_start])
+  local elapsed = nil
+
+  if vim.g[global_start] < last_write then
+    elapsed = os.difftime(os.time(), last_write)
+  else
+    elapsed = os.difftime(os.time(), vim.g[global_start])
+  end
 
   return previous_time + elapsed
 end

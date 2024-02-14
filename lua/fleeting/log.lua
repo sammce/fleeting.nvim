@@ -12,6 +12,30 @@ M.notify_error = function(message)
 end
 
 
+-- Try to convert the log file to the correct format, returning an error code if it fails.
+--- @return number? error: an error code, or nil if the file was converted successfully
+M.convert = function()
+  local file = io.open(log_file, "r+")
+
+  if file == nil then
+    M.notify_error("Log file not found")
+    return
+  end
+
+  local previous_time = tonumber(file:read())
+
+  if previous_time == nil then
+    file:close()
+    return 1
+  end
+
+  file:write(previous_time .. "\n")
+  file:write(os.time() .. "\n")
+
+  file:close()
+end
+
+
 --  Try to open the log file. If it doesn't exist,
 --  create it and write the current time to it.
 ---  @return number? error: an error code, or nil if the file was created successfully
@@ -27,14 +51,29 @@ M.init = function()
     end
 
     file:write(0 .. "\n")
+    file:write(os.time() .. "\n")
+
+    file:close()
+    return
+  end
+
+  local previous_time = tonumber(file:read())
+  local last_write = tonumber(file:read())
+
+  if previous_time == nil or last_write == nil then
+    local err = M.convert()
+    if err then
+      vim.notify("Invalid log file, run :Fleeting to reset", vim.log.levels.ERROR, { title = title })
+    end
   end
 
   file:close()
 end
 
 
--- Read the duration from the log file (as a number).
+-- Read the duration and time of last write from the log file (numbers).
 --- @return number? duration: the duration in seconds, or nil if the file could not be read
+--- @return number? last_write: the time the file was last written to, or nil if the file could not be read
 M.read = function()
   if not vim.g[global_initialised] then
     return nil
@@ -43,15 +82,16 @@ M.read = function()
   local file = io.open(log_file, "r")
 
   if file == nil then
-    M.notify_error("Error while reading log file")
+    M.notify_error("Log file not found")
     return nil
   end
 
-  local duration = tonumber(file:read())
+  local previous_time = tonumber(file:read())
+  local last_write = tonumber(file:read())
 
   file:close()
 
-  return duration
+  return previous_time, last_write
 end
 
 
@@ -71,6 +111,7 @@ M.write = function(duration)
   end
 
   file:write(duration .. "\n")
+  file:write(os.time() .. "\n")
   file:close()
 end
 
