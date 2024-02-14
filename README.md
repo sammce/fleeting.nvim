@@ -48,6 +48,12 @@ Refer to the table of commands below:
 
 No, again, this plugin is not magic (unfortunately). The plugin simply marks the time when you enter and leave neovim, calculates the difference, and stores it in a file at `vim.fn.stdpath("cache") .. "/fleeting.log"`, usually equivalent to `~/.cache/nvim/fleeting.log`. This allows the plugin to persist the timer over multiple neovim sessions.
 
+Care is taken to prevent 'double tracking' when using multiple instances of neovim, so worry not! The timer will reflect the true amount of time neovim has been open.
+
+## License
+
+See [LICENSE](https://github.com/sammce/fleeting.nvim/blob/main/LICENSE)
+
 ## Contributing
 
 If you would like to contribute, please open a pull request! I'd be more than happy to expand this plugin.
