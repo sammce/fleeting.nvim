@@ -4,6 +4,18 @@ Time is fleeting, and what better way to spend it than ~~configuring~~ using [Ne
 
 This plugin simply keeps track of the amount of time you have spent in neovim (since installing the plugin, it's not magic).
 
+---
+
+Notification using [nvim-notify](https://github.com/rcarriga/nvim-notify):
+
+<img width="600" alt="Notification showcase with vim notify" src="https://github.com/sammce/fleeting.nvim/assets/78268167/bb05b827-dba4-4d0e-8738-f2f5814d4f0f">
+
+Without a fancy notification plugin:
+
+<img width="600" alt="Notification showcase with default vim" src="https://github.com/sammce/fleeting.nvim/assets/78268167/2724f037-22bb-4023-8b70-ed04d2239723">
+
+---
+
 This is a dastardly simple plugin, and by dastardly simple, I mean I wrote it today.
 Today is obviously not _today_ for you, but it is for me. Anyway...
 
@@ -14,7 +26,7 @@ Today is obviously not _today_ for you, but it is for me. Anyway...
 
 ## Installation
 
-Requires neovim, and a package manager of your choice.
+Requires neovim, and a plugin manager of your choice.
 
 Using [lazy](https://github.com/folke/lazy.nvim):
 
@@ -40,7 +52,7 @@ Refer to the table of commands below:
 
 | Command           | Effect                                                          |
 | ----------------- | --------------------------------------------------------------- |
-| `:Fleeting`       | Displays a notification showing how long you've spent in neovim |
+| `:Fleeting`       | Display a notification showing how long you've spent in neovim |
 | `:FleetingReset`  | Reset the timer and log file to 0. Doesn't get your time back   |
 | `:FleetingDelete` | Delete the log file, effectively resetting the timer            |
 
